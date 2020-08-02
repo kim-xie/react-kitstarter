@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import './index.css';
-import App from './App';
+import 'antd/dist/antd.css';
+import { App } from './App.tsx';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App compiler="TypeScript" framework="React" />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -135,3 +135,56 @@ plugins: [
          */
         new CleanWebpackPlugin(),
     ],
+
+
+### 引入eslint
+npx eslint --init
+#### 生成.eslintrc.js
+// First, run the linter.
+// It's important to do this before Babel processes the JS.
+{
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
+    enforce: 'pre',
+    use: [
+    {
+        options: {
+          cache: true,
+          formatter: require.resolve('react-dev-utils/eslintFormatter'),
+          eslintPath: require.resolve('eslint'),
+          resolvePluginsRelativeTo: __dirname,
+        },
+        loader: require.resolve('eslint-loader'),
+    },
+    ],
+    include: paths.appSrc,
+},
+
+#### npm install eslint-friendly-formatter
+
+
+### 引入typescript
+npm install --save-dev typescript awesome-typescript-loader source-map-loader @types/react @types/react-dom @types/jest
+
+tsconfig.json
+
+### 动态按需引入第三方库
+#### 安装
+yarn add react-app-rewired customize-cra babel-plugin-import less-loader
+
+#### 配置文件
+config-overrides.js
+
+const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+module.exports = override(
+  fixBabelImports('import', {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: true,
+  }),
+  addLessLoader({
+    lessOptions: {
+      javascriptEnabled: true,
+      modifyVars: { '@primary-color': '#1DA57A' },
+    }
+  }),
+);
